@@ -4,24 +4,15 @@ import Sushi from '../components/Sushi'
 
 const SushiContainer = (props) => {
 
-  const {sushiList, renderedSushi} = props
-
-  //passed into Sushi to determine whether sushi has been clicked on/eaten
-  const sushiEaten = (sushi) => {
-    props.handleSushiEaten(sushi);
-  }
-
-  const displayMoreSushi = () => {
-    props.renderFourSushi(sushiList)
-  }
-
+  const {sushi, handleSushiEaten} = props
+ 
   return (
     <Fragment>
       <div className="belt">
-         {renderedSushi.map(sushi => 
-            <Sushi sushi={sushi} key={sushi.id} sushiEaten={sushiEaten} />
+         {sushi.map(s => 
+            <Sushi sushi={s} key={s.id} handleSushiEaten={handleSushiEaten} />
          )}
-        <MoreButton displayMoreSushi={displayMoreSushi} />
+        <MoreButton moreSushi={props.moreSushi} />
       </div>
     </Fragment>
   )

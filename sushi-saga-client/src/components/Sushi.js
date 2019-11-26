@@ -1,13 +1,14 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 
 const Sushi = (props) => {
 
-  const {name, img_url, price, eaten} = props.sushi
+  const {sushi: {name, img_url, price, eaten}, handleSushiEaten, sushi} = props
 
   //added in eaten variable to keep track of whether the piece has been eaten or not to display the image
+  //adding eaten in sushi is going to be initially null
   const handleClick = () => {
-    props.sushiEaten(props.sushi);
-    props.sushi.eaten = true
+    handleSushiEaten(sushi);
+    sushi.eaten = true
   }
 
   return (
@@ -19,7 +20,7 @@ const Sushi = (props) => {
       <h4 className="sushi-details">
         {name} - ${price}
       </h4>
-    </div>
+    </div> 
   )
 }
 

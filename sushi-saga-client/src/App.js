@@ -9,7 +9,6 @@ class App extends Component {
 
   state = {
     sushiList: [],
-    renderedSushi: [],
     lastPosition: 0,
     eaten: [],
     wallet: 50
@@ -22,19 +21,13 @@ class App extends Component {
         this.setState({
           sushiList: allSushi
         });
-        this.renderFourSushi(allSushi)
       })
   }
 
-  //array to render only 4 pieces of sushi at a time. Sets the state for both rendered sushi and last position
-  renderFourSushi = (sushiList) => {
+  moreSushi = () => {
     this.setState((prevState) => {
-      return {renderedSushi: sushiList.slice(prevState.lastPosition, prevState.lastPosition + 4)}
-    });
-    this.setState((prevState => {
       return {lastPosition: prevState.lastPosition + 4}
     })
-    )
   }
 
   componentDidMount() {
@@ -57,9 +50,11 @@ class App extends Component {
 
   render() {
 
+    const fourSushi = this.state.sushiList.slice(this.state.lastPosition, this.state.lastPosition + 4)
+
     return (
       <div className="app">
-        <SushiContainer sushiList={this.state.sushiList} renderedSushi={this.state.renderedSushi} handleSushiEaten={this.handleSushiEaten} renderFourSushi={this.renderFourSushi} />
+        <SushiContainer handleSushiEaten={this.handleSushiEaten} sushi={fourSushi} moreSushi={this.moreSushi} />
         <Table eatenSushi={this.state.eaten} wallet={this.state.wallet} />
       </div>
     );
